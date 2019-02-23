@@ -13,3 +13,9 @@ services:
     environment:
       - CF_API_KEY=${KEY}
       - CF_API_EMAIL=${EMAIL}
+
+networks:
+  cv:
+    external: true
+  escort:
+    external: true
