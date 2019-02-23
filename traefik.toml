@@ -1,0 +1,28 @@
+defaultEntryPoints = ["http", "https"]
+
+[docker]
+domain = "devcv.tk"
+watch = true
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+
+[acme]
+email = "sylvaincombraque@hotmail.fr"
+entryPoint = "https"
+storage = "acme.json"
+[acme.dnsChallenge]
+  provider = "cloudflare"
+  delayBeforeCheck = 0
+[[acme.domains]]
+  main = "devcv.tk"
+  sans = ["api.devcv.tk", "www.devcv.tk"]
+[[acme.domains]]
+  main = "escort-me.online"
+  sans = ["api.escort-me.online", "cache.escort-me.online", "www.escort-me.online"]

@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  traefik:
+    image: traefik
+    command: --api --docker
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/traefik.toml
+      - ./acme.json:/acme.json
+    environment:
+      - CF_API_KEY=${KEY}
+      - CF_API_EMAIL=${EMAIL}
