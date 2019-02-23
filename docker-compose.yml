@@ -13,6 +13,9 @@ services:
     environment:
       - CF_API_KEY=${KEY}
       - CF_API_EMAIL=${EMAIL}
+    networks:
+      - cv
+      - escort
 
 networks:
   cv:
