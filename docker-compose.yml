@@ -24,6 +24,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.toml:/traefik.toml
+      - ./log/traefik:/var/log
       - ./acme.json:/acme.json
     environment:
       - CF_API_KEY=${KEY}
