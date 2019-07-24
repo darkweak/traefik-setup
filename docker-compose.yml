@@ -1,8 +1,23 @@
 version: '3.4'
+
+x-network:
+  &network
+  networks:
+    - api_platform_ssr
+    - cheatuniverse_darkweak
+    - cv
+    - fire
+    - marketplace_darkweak
+
 services:
   traefik:
     image: traefik
-    command: --api --docker
+    command:
+      - --api
+      - --docker
+      - --loglevel=DEBUG
+      - --accessLog.filePath=/var/log/access.log
+      - --accessLog.filters.statusCodes=400-503
     ports:
       - "80:80"
       - "443:443"
@@ -13,12 +28,17 @@ services:
     environment:
       - CF_API_KEY=${KEY}
       - CF_API_EMAIL=${EMAIL}
-    networks:
-      - api_platform_ssr
-      - cheatuniverse_darkweak
-      - cv
-      - fire
-      - marketplace_darkweak
+    <<: *network
+
+  fail2ban:
+    image: crazymax/fail2ban:latest
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./log:/var/log:ro
+      - ./data:/data
 
 networks:
   api_platform_ssr:
