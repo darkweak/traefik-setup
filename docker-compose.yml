@@ -14,11 +14,20 @@ services:
       - CF_API_KEY=${KEY}
       - CF_API_EMAIL=${EMAIL}
     networks:
+      - api_platform_ssr
+      - cheatuniverse_darkweak
       - cv
-      - escort
+      - fire
+      - marketplace_darkweak
 
 networks:
+  api_platform_ssr:
+    external: true
+  cheatuniverse_darkweak:
+    external: true
   cv:
     external: true
-  escort:
+  fire:
+    external: true
+  marketplace_darkweak:
     external: true
