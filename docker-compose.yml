@@ -33,6 +33,8 @@ services:
 
   fail2ban:
     image: crazymax/fail2ban:latest
+    env_file:
+      - ./fail2ban.env
     network_mode: "host"
     cap_add:
       - NET_ADMIN
