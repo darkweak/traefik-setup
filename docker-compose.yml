@@ -4,10 +4,6 @@ x-network:
   &network
   networks:
     - api_platform_ssr
-    - cheatuniverse_darkweak
-    - cv
-    - fire
-    - marketplace_darkweak
 
 services:
   traefik:
@@ -17,7 +13,7 @@ services:
       - --docker
       - --loglevel=DEBUG
       - --accessLog.filePath=/var/log/traefik/access.log
-      - --accessLog.filters.statusCodes=400-503
+      - --accessLog.filters.statusCodes=404
     ports:
       - "80:80"
       - "443:443"
@@ -26,21 +22,15 @@ services:
       - ./traefik.toml:/traefik.toml
       - ./log:/var/log
       - ./acme.json:/acme.json
-    environment:
-      - CF_API_KEY=${KEY}
-      - CF_API_EMAIL=${EMAIL}
     <<: *network
 
   fail2ban:
-    image: crazymax/fail2ban:latest
-    environment:
-      - TZ=Europe/Paris
-      - F2B_LOG_TARGET=STDOUT
-      - F2B_LOG_LEVEL=INFO
-      - F2B_DB_PURGE_AGE=1d
-      - F2B_MAX_RETRY=6
-      - F2B_ACTION=%(action_)s
-      - F2B_IPTABLES_CHAIN=DOCKER-USER
+    image: alpine:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile-fail2ban
+    env_file:
+      - ./fail2ban.env
     network_mode: "host"
     cap_add:
       - NET_ADMIN
@@ -51,12 +41,4 @@ services:
 
 networks:
   api_platform_ssr:
-    external: true
-  cheatuniverse_darkweak:
-    external: true
-  cv:
-    external: true
-  fire:
-    external: true
-  marketplace_darkweak:
     external: true
