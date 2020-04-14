@@ -3,25 +3,19 @@ version: '3.4'
 x-network:
   &network
   networks:
-    - api_platform_ssr
+    - my_network
 
 services:
   traefik:
-    image: traefik
-    command:
-      - --api
-      - --docker
-      - --loglevel=DEBUG
-      - --accessLog.filePath=/var/log/traefik/access.log
-      - --accessLog.filters.statusCodes=404
+    image: traefik:v2.0
     ports:
       - "80:80"
+      - "8080:8080"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik.toml:/traefik.toml
+      - ./traefik.toml:/etc/traefik/traefik.toml
       - ./log:/var/log
-      - ./acme.json:/acme.json
     <<: *network
 
   fail2ban:
@@ -40,5 +34,5 @@ services:
       - ./data:/data
 
 networks:
-  api_platform_ssr:
+  my_network:
     external: true
