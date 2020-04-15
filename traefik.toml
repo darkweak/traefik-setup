@@ -1,10 +1,10 @@
 [providers.docker]
   endpoint = "unix:///var/run/docker.sock"
 
-[providers]
-  [providers.file]
-    filename = "./domains.toml"
-    watch = true
+#[providers]
+#  [providers.file]
+#    filename = "./domains.toml"
+#    watch = true
 
 [api]
   insecure = true
