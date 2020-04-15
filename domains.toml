@@ -1,0 +1,37 @@
+[http.routers]
+  [http.routers.admin-cv-spa]
+    [http.routers.admin-cv-spa.tls]
+      [[http.routers.admin-cv-spa.tls.domains]]
+        main = "devcv.fr"
+        sans = ["*.devcv.fr"]
+
+  [http.routers.api-cv-spa]
+    [http.routers.api-cv-spa.tls]
+      [[http.routers.api-cv-spa.tls.domains]]
+        main = "devcv.fr"
+        sans = ["*.devcv.fr"]
+
+  [http.routers.cache-cv-spa]
+    [http.routers.cache-cv-spa.tls]
+      [[http.routers.cache-cv-spa.tls.domains]]
+        main = "devcv.fr"
+        sans = ["*.devcv.fr"]
+
+  [http.routers.client-cv-spa]
+    [http.routers.client-cv-spa.tls]
+      [[http.routers.client-cv-spa.tls.domains]]
+        main = "devcv.fr"
+        sans = ["*.devcv.fr"]
+
+  [http.routers.mercure-cv-spa]
+    [http.routers.mercure-cv-spa.tls]
+      [[http.routers.mercure-cv-spa.tls.domains]]
+        main = "devcv.fr"
+        sans = ["*.devcv.fr"]
+
+  [http.routers.ssr-cv-spa]
+    [http.routers.ssr-cv-spa.tls]
+      [[http.routers.ssr-cv-spa.tls.domains]]
+        main = "devcv.fr"
+        sans = ["*.devcv.fr"]
+

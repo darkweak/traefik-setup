@@ -1,6 +1,11 @@
 [providers.docker]
   endpoint = "unix:///var/run/docker.sock"
 
+[providers]
+  [providers.file]
+    filename = "./domains.toml"
+    watch = true
+
 [api]
   insecure = true
   dashboard = true
@@ -29,15 +34,3 @@
   caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
   [certificatesResolvers.sample.acme.dnsChallenge]
     provider = "cloudflare"
-
-[http.routers]
-  [http.routers.cache-cv-spa]
-    [http.routers.cache-cv-spa.tls]
-      [[http.routers.cache-cv-spa.tls.domains]]
-        main = "devcv.fr"
-        sans = ["*.devcv.fr"]
-  [http.routers.ssr-cv-spa]
-    [http.routers.ssr-cv-spa.tls]
-      [[http.routers.ssr-cv-spa.tls.domains]]
-        main = "devcv.fr"
-        sans = ["*.devcv.fr"]

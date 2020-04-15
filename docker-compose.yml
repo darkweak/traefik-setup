@@ -3,9 +3,7 @@ version: '3.4'
 x-network:
   &network
   networks:
-    - cheatuniverse_darkweak
     - cv
-    - fire
     - marketplace_darkweak
 
 services:
@@ -37,11 +35,7 @@ services:
       - ./data:/data
 
 networks:
-  cheatuniverse_darkweak:
-    external: true
   cv:
-    external: true
-  fire:
     external: true
   marketplace_darkweak:
     external: true
