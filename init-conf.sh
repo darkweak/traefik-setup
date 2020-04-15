@@ -19,7 +19,6 @@ do
   read -ra SERVICES <<< "${ADDR[2]}"
   for s in "${SERVICES[@]}"
   do
-    echo "$s"
     text+="
   [http.routers.$s-$folder]
     [http.routers.$s-$folder.tls]
