@@ -3,14 +3,17 @@ version: '3.4'
 x-network:
   &network
   networks:
-    - my_network
+    - cheatuniverse_darkweak
+    - cv
+    - fire
+    - marketplace_darkweak
 
 services:
   traefik:
-    image: traefik:v2.0
+    image: traefik:v2.2
     ports:
       - "80:80"
-      - "8080:8080"
+        #      - "8080:8080"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -34,5 +37,11 @@ services:
       - ./data:/data
 
 networks:
-  my_network:
+  cheatuniverse_darkweak:
+    external: true
+  cv:
+    external: true
+  fire:
+    external: true
+  marketplace_darkweak:
     external: true

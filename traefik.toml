@@ -6,21 +6,38 @@
   dashboard = true
   debug = true
 
-[entryPoints]
-  [entryPoints.web]
-    address = ":80"
-  [entryPoints.web-secure]
-    address = ":443"
+[entryPoints.web]
+  address = ":80"
+
+  [entryPoints.web.http]
+    [entryPoints.web.http.redirections]
+      [entryPoints.web.http.redirections.entryPoint]
+        to = "web-secure"
+        scheme = "https"
+
+[entryPoints.web-secure]
+  address = ":443"
 
 [accessLog]
   filePath = "/var/log/traefik/access.log"
   [accessLog.filters]
     statusCodes = "404"
 
-#[certificatesResolvers.sample.acme]
-#  email = "youremail@domain.com"
-#  storage = "acme.json"
-#  caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
-#  [certificatesResolvers.sample.acme.httpChallenge]
-#  [acme.httpChallenge]
-#    entryPoint = "web"
+[certificatesResolvers.sample.acme]
+  email = "youremail@domain.com"
+  storage = "acme.json"
+  caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+  [certificatesResolvers.sample.acme.dnsChallenge]
+    provider = "cloudflare"
+
+[http.routers]
+  [http.routers.cache-cv-spa]
+    [http.routers.cache-cv-spa.tls]
+      [[http.routers.cache-cv-spa.tls.domains]]
+        main = "devcv.fr"
+        sans = ["*.devcv.fr"]
+  [http.routers.ssr-cv-spa]
+    [http.routers.ssr-cv-spa.tls]
+      [[http.routers.ssr-cv-spa.tls.domains]]
+        main = "devcv.fr"
+        sans = ["*.devcv.fr"]
